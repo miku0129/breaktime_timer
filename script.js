@@ -17,13 +17,20 @@ function startTimer() {
   //入力値から値を取得する。入力時は半角に変換する
   mm = document.body.querySelector("input").value;
   mm = hankaku(mm);
+  mm = parseInt(mm);
+  targetSec = mm * 60;
+  ss = 0;
+
+  //未入力、数値以外の値にはメッセージを返す
   if (!mm) {
     console.log("set minutes");
+    document.getElementById("message").textContent = "分を入力してください";
+    return;
+  } else if (typeof mm !== "number") {
+    console.log("should be a number");
+    document.getElementById("message").textContent = "数値を入力してください";
     return;
   }
-  mm = parseInt(mm);
-  ss = 0;
-  targetSec = mm * 60;
 
   //もしタイマーが再開であれば、経過した時間から開始する
   let startTime = document.getElementById("result").textContent.split(":");
@@ -31,9 +38,7 @@ function startTimer() {
     mm = startTime[1];
     ss = startTime[2];
   }
-  // console.log("startTime mm:", mm);
-  // console.log("startTime ss:", ss);
-  // console.log("message mm:", mm);
+
   message(parseInt(mm));
 
   timer = window.setInterval(() => {
@@ -49,16 +54,13 @@ function startTimer() {
     ss = parseInt(ss);
     mm = parseInt(mm);
 
-    //秒がゼロになったら60に初期化し分を1繰り下げる
-    if (mm > 0 && ss === 0) {
-      ss = 60;
-      mm -= 1; 
-      //分と秒がゼロになったら終了させる
-    } else if (mm === 0 && ss === 0) {
+
+    //分と秒がゼロになったら終了させる
+    if (mm === 0 && ss === 0) {
       console.log("fin");
       stopTimer();
       document.getElementById("result").textContent = "00:00:00";
-      document.body.style.backgroundColor = "antiquewhite"
+      document.body.style.backgroundColor = "antiquewhite";
       return;
       //残り10秒になったら1秒ごとに背景の色を切り替える
     } else if (mm === 0 && ss < 10 && ss % 2 === 0) {
@@ -66,10 +68,11 @@ function startTimer() {
     } else if (mm === 0 && ss < 10 && ss % 2 === 1) {
       document.body.style.background = "yellow";
     }
-    ss--;
-    // console.log({ mm });
-    // console.log({ ss });
+
+    //経過時間を計算する
     targetSec--;
+    mm = Math.floor(targetSec/60);
+    ss = targetSec - (mm*60); 
   }, 1000);
 }
 
@@ -85,7 +88,7 @@ function clearTimer() {
   document.getElementById("result").textContent = "00:00:00";
   document.body.querySelector("input").value = "";
   document.getElementById("message").textContent = " ";
-  document.body.style.backgroundColor = "antiquewhite"
+  document.body.style.backgroundColor = "antiquewhite";
 }
 
 function message(breakTime) {
@@ -102,8 +105,6 @@ function message(breakTime) {
   if (counter > 0) {
     hh += counter;
   }
-  // console.log({hh})
-  // console.log({mm})
 
   hh = hh < 10 ? "0" + hh : hh;
   mm = mm < 10 ? "0" + mm : mm;
@@ -114,8 +115,8 @@ function message(breakTime) {
 
 //全角から半角に変換
 function hankaku(str) {
-  return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
-      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+  return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (s) {
+    return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
   });
 }
 

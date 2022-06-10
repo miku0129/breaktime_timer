@@ -25,6 +25,8 @@ Now you won't make mistakes anymore!
 
 ## Demo
 
+![break_time_timer_demo](https://user-images.githubusercontent.com/58237700/173159011-407a79e5-1f9f-4110-98d2-c568a32f532f.gif)
+
 ## You can get the app here 
 
 https://codepen.io/mikuSan/full/LYQBmvB

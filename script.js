@@ -16,9 +16,16 @@ function startTimer() {
   let ss, mm, targetSec, result;
   let counter = 0;
 
-  targetSec = 120;
-  mm = 0;
-  ss = 10;
+  mm = document.body.querySelector("input").value; 
+  if(!mm){
+    console.log("please set minutes"); 
+    return; 
+  }
+  mm = parseInt(mm); 
+  console.log({mm}); 
+  ss = 0; 
+  targetSec = mm * 60; 
+
 
   //もしタイマーが再開であれば、経過した時間から開始する
   let startTime = document.getElementById("result").textContent.split(":");
@@ -54,8 +61,8 @@ function startTimer() {
       return;
     }
     ss--;
-    console.log({ mm });
-    console.log({ ss });
+    // console.log({ mm });
+    // console.log({ ss });
     targetSec--;
   }, 1000);
 }
@@ -70,6 +77,7 @@ function clearTimer() {
   window.clearInterval(timer);
   timer = null;
   document.getElementById("result").textContent = "00:00:00";
+  
 }
 
 /*

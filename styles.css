@@ -1,0 +1,16 @@
+
+body{
+    background-color: antiquewhite;
+}
+
+.show{
+    text-align: center;
+}
+
+.show #result{
+    font-size: 100px;
+}
+
+.show #message{
+    font-size: 50px;
+}

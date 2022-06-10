@@ -7,13 +7,13 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <meta name="theme-color" content="#000000" />
-    <title>timer</title>
-    <!-- <link rel="stylesheet" type="text/css" href="styles.css" /> -->
+    <title>Break Time Timer</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
     <!-- <script type="text/javascript" src="modules/lodash.min.js"></script>
     <script type="text/javascript" src="modules/test-boilerplate.js"></script> -->
   </head>
   <body>
-    <h1>Break time ☕🍰</h1>
+    <h1>Break Time Timer☕🍰</h1>
     <hr />
     <label for+"name">Break time</label>
     <input
@@ -27,9 +27,10 @@
     <button id="startButton" onclick="startTimer">start</button>
     <button id="stopButton" onclick="stopTimer">stop</button>
     <button id="clearButton" onclick="clearTimer">clear</button>
-    <p id="result">00:00:00</p>
-    <br>
-    <p id="message"></p>
+    <div class="show">
+      <p id="result">00:00:00</p>
+      <p id="message"></p>
+    </div>
 
     <script type="text/javascript" src="script.js"></script>
   </body>

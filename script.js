@@ -68,7 +68,7 @@ function startTimer() {
     } else if (mm === 0 && ss < 10 && ss % 2 === 0) {
       document.body.style.background = "orange";
     } else if (mm === 0 && ss < 10 && ss % 2 === 1) {
-      document.body.style.background = "white";
+      document.body.style.background = "yellow";
     }
     ss--;
     // console.log({ mm });

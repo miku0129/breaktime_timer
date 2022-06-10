@@ -1,5 +1,4 @@
 "use strict";
-console.log("hello world");
 
 let timer;
 
@@ -16,10 +15,11 @@ function startTimer() {
   let ss, mm, targetSec, result;
   let counter = 0;
 
-  //入力値から値を取得する
+  //入力値から値を取得する。入力時は半角に変換する
   mm = document.body.querySelector("input").value;
+  mm = hankaku(mm);
   if (!mm) {
-    console.log("please set minutes");
+    console.log("set minutes");
     return;
   }
   mm = parseInt(mm);
@@ -32,9 +32,9 @@ function startTimer() {
     mm = startTime[1];
     ss = startTime[2];
   }
-  console.log("startTime mm:", mm);
-  console.log("startTime ss:", ss);
-  console.log("message mm:", mm);
+  // console.log("startTime mm:", mm);
+  // console.log("startTime ss:", ss);
+  // console.log("message mm:", mm);
   message(parseInt(mm));
 
   timer = window.setInterval(() => {
@@ -63,6 +63,7 @@ function startTimer() {
       console.log("fin");
       stopTimer();
       document.getElementById("result").textContent = "00:00:00";
+      document.body.style.backgroundColor = "antiquewhite"
       return;
       //残り10秒になったら1秒ごとに背景の色を切り替える
     } else if (mm === 0 && ss < 10 && ss % 2 === 0) {
@@ -89,6 +90,7 @@ function clearTimer() {
   document.getElementById("result").textContent = "00:00:00";
   document.body.querySelector("input").value = "";
   document.getElementById("message").textContent = " ";
+  document.body.style.backgroundColor = "antiquewhite"
 }
 
 function message(breakTime) {
@@ -115,7 +117,16 @@ function message(breakTime) {
   message.textContent = `休憩時間は ${hh}:${mm} までです`;
 }
 
+//全角から半角に変換
+function hankaku(str) {
+  return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
+      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+  });
+}
+
 /*
 参考
 https://ict-skillup.com/javascript/2000/
+
+https://www.yoheim.net/blog.php?q=20191101
 */

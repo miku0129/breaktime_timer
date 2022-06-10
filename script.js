@@ -13,7 +13,6 @@ clearButton.addEventListener("click", clearTimer);
 
 function startTimer() {
   let ss, mm, targetSec, result;
-  let counter = 0;
 
   //入力値から値を取得する。入力時は半角に変換する
   mm = document.body.querySelector("input").value;
@@ -53,11 +52,7 @@ function startTimer() {
     //秒がゼロになったら60に初期化し分を1繰り下げる
     if (mm > 0 && ss === 0) {
       ss = 60;
-      counter += 1;
-      //counterで分の経過を計算する
-      if (counter > 0) {
-        mm -= counter;
-      }
+      mm -= 1; 
       //分と秒がゼロになったら終了させる
     } else if (mm === 0 && ss === 0) {
       console.log("fin");

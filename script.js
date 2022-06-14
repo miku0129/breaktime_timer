@@ -54,13 +54,13 @@ function startTimer() {
     ss = parseInt(ss);
     mm = parseInt(mm);
 
-
-    //分と秒がゼロになったら終了させる
+    //分と秒がゼロになったら終了させ、効果音を鳴らす
     if (mm === 0 && ss === 0) {
       console.log("fin");
       stopTimer();
       document.getElementById("result").textContent = "00:00:00";
       document.body.style.backgroundColor = "antiquewhite";
+      playaudio();
       return;
       //残り10秒になったら1秒ごとに背景の色を切り替える
     } else if (mm === 0 && ss < 10 && ss % 2 === 0) {
@@ -71,8 +71,8 @@ function startTimer() {
 
     //経過時間を計算する
     targetSec--;
-    mm = Math.floor(targetSec/60);
-    ss = targetSec - (mm*60); 
+    mm = Math.floor(targetSec / 60);
+    ss = targetSec - mm * 60;
   }, 1000);
 }
 
@@ -89,6 +89,8 @@ function clearTimer() {
   document.body.querySelector("input").value = "";
   document.getElementById("message").textContent = " ";
   document.body.style.backgroundColor = "antiquewhite";
+
+  stopaudio();
 }
 
 function message(breakTime) {
@@ -120,9 +122,21 @@ function hankaku(str) {
   });
 }
 
+//音楽を鳴らす
+function playaudio() {
+    document.getElementById("audio").play();
+}
+//音楽を止める
+function stopaudio() {
+  document.getElementById("audio").pause();
+}
+
 /*
 参考
 https://ict-skillup.com/javascript/2000/
 
 https://www.yoheim.net/blog.php?q=20191101
+
+タイマー終了時に音を鳴らす
+https://novicengineering.com/javascript_timer_4/
 */

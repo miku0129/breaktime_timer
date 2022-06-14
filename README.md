@@ -25,7 +25,7 @@ Now you won't make mistakes anymore!
 
 ## Demo
 
-![break_time_timer_demo](https://user-images.githubusercontent.com/58237700/173159011-407a79e5-1f9f-4110-98d2-c568a32f532f.gif)
+![break_time_timer_demo](https://user-images.githubusercontent.com/58237700/173501849-b9202741-b032-4b65-bc29-99798589adb8.gif)
 
 ## You can get the app here 
 

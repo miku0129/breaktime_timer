@@ -3,6 +3,10 @@ body{
     background-color: antiquewhite;
 }
 
+#title{
+    color: burlywood;
+}
+
 .show{
     text-align: center;
 }
@@ -16,4 +20,5 @@ body{
 .show #message{
     font-size: 50px;
     margin-top: 10px;
+    color: gray;
 }

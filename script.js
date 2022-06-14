@@ -137,6 +137,13 @@ https://ict-skillup.com/javascript/2000/
 
 https://www.yoheim.net/blog.php?q=20191101
 
-タイマー終了時に音を鳴らす
+タイマー終了時に音を鳴らす <audio>タグの使い方
 https://novicengineering.com/javascript_timer_4/
+
+Googleドライブ内の音声ファイルをaudioタグで再生する
+※実際にはファイルIDの後に拡張子は不要だった
+https://www.pre-practice.net/2019/03/googleaudio.html
+
+Googleドライブ上のファイルに直接アクセスする
+https://qiita.com/rot-z/items/299ac40361690c51ce1d
 */

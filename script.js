@@ -21,16 +21,17 @@ function startTimer() {
   targetSec = mm * 60;
   ss = 0;
 
-  //未入力、数値以外の値にはメッセージを返す
+  //未入力、ゼロよりも小さな値にはメッセージを返す
   if (!mm) {
     console.log("set minutes");
-    document.getElementById("message").textContent = "分を入力してください";
+    document.getElementById("message").textContent = "入力が不正です";
     return;
-  } else if (typeof mm !== "number") {
-    console.log("should be a number");
-    document.getElementById("message").textContent = "数値を入力してください";
+  } else if (mm < 0) {
+    console.log("should be a positive number");
+    document.getElementById("message").textContent =
+      "ゼロより大きな数値を入力してください";
     return;
-  }
+  } 
 
   //もしタイマーが再開であれば、経過した時間から開始する
   let startTime = document.getElementById("result").textContent.split(":");
@@ -124,7 +125,7 @@ function hankaku(str) {
 
 //音楽を鳴らす
 function playaudio() {
-    document.getElementById("audio").play();
+  document.getElementById("audio").play();
 }
 //音楽を止める
 function stopaudio() {
@@ -133,6 +134,7 @@ function stopaudio() {
 
 /*
 参考
+タイマー作成
 https://ict-skillup.com/javascript/2000/
 
 https://www.yoheim.net/blog.php?q=20191101

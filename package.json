@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build": "tsc ./src/script.ts",
+    "start": ""
+  },
+  "dependencies": {
+    "typescript": "^5.5.2"
+  }
+}

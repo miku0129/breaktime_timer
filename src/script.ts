@@ -1,94 +1,88 @@
 "use strict";
 
-let timer: number | undefined;
+let hasStoppedOnce = false;
+let ss: number | string = 0;
+let mm: number | string = 0;
+let targetSec: number = 0;
+let intervalId: number | undefined;
+let result;
 
-const startButton = document.getElementById("startButton");
-startButton!.addEventListener("click", startTimer);
+const startTimer = (): void => {
+  if (!hasStoppedOnce) {
+    //タイマー開始直後は入力値から値を取得する。入力時は半角に変換する
+    mm = document.body.querySelector("input")!.value;
+    mm = hankaku(mm);
+    mm = typeof mm === "string" ? parseInt(mm) : mm;
 
-const stopButton = document.getElementById("stopButton");
-stopButton!.addEventListener("click", stopTimer);
+    //未入力、ゼロよりも小さな値にはメッセージを返す
+    if (!mm) {
+      console.log("set minutes");
+      document.getElementById("message")!.textContent = "Incorrect input";
+      return;
+    } else if (typeof mm === "number" && mm < 0) {
+      console.log("should be a positive number");
+      document.getElementById("message")!.textContent =
+        "Please enter a number greater than zero";
+      return;
+    }
 
-const clearButton = document.getElementById("clearButton");
-clearButton!.addEventListener("click", clearTimer);
-
-function startTimer() {
-  let ss: number | string, mm: number | string, targetSec: number, result;
-
-  //入力値から値を取得する。入力時は半角に変換する
-  mm = document.body.querySelector("input")!.value;
-  mm = hankaku(mm);
-  mm = typeof mm === "string" ? parseInt(mm) : mm;
-  targetSec = mm * 60;
-  ss = 0;
-
-  //未入力、ゼロよりも小さな値にはメッセージを返す
-  if (!mm) {
-    console.log("set minutes");
-    document.getElementById("message")!.textContent = "入力が不正です";
-    return;
-  } else if (mm < 0) {
-    console.log("should be a positive number");
-    document.getElementById("message")!.textContent =
-      "ゼロより大きな数値を入力してください";
-    return;
+    targetSec = mm * 60;
+    ss = 0;
   }
 
-  //もしタイマーが再開であれば、経過した時間から開始する
-  let startTime = document.getElementById("result")!.textContent!.split(":");
-  if (parseInt(startTime[2]) > 0) {
-    mm = startTime[1];
-    ss = startTime[2];
-  }
+  // typeof mm === "string" ? message(parseInt(mm)) : mm;
 
-  typeof mm === "string" ? message(parseInt(mm)) : mm;
+  intervalId = window.setInterval(() => {
+    if (intervalId !== null && targetSec > 0) {
+      console.log("timer", mm, ":", ss);
 
-  timer = window.setInterval(() => {
-    if (timer !== null && targetSec > 0) {
       ss = typeof ss === "string" ? parseInt(ss) : ss;
       mm = typeof mm === "string" ? parseInt(mm) : mm;
       ss = ss < 10 && ss >= 0 ? "0" + ss : ss;
       mm = mm < 10 && mm >= 0 ? "0" + mm : mm;
     }
     result = document.getElementById("result");
-    result!.textContent = `00:${mm}:${ss}`;
+    result!.textContent = `${mm}:${ss}`;
 
     ss = typeof ss === "string" ? parseInt(ss) : ss;
     mm = typeof mm === "string" ? parseInt(mm) : mm;
 
-    //分と秒がゼロになったら終了させ、効果音を鳴らす
-    if (mm === 0 && ss === 0) {
-      console.log("fin");
-      stopTimer();
-      document.getElementById("result")!.textContent = "00:00:00";
-      document.body.style.backgroundColor = "antiquewhite";
-      playaudio();
-      return;
-      //残り10秒になったら1秒ごとに背景の色を切り替える
-    } else if (mm === 0 && ss < 10 && ss % 2 === 0) {
-      document.body.style.background = "orange";
-    } else if (mm === 0 && ss < 10 && ss % 2 === 1) {
-      document.body.style.background = "yellow";
-    }
+    // //分と秒がゼロになったら終了させ、効果音を鳴らす
+    // if (mm === 0 && ss === 0) {
+    //   console.log("fin");
+    //   stopTimer();
+    //   document.getElementById("result")!.textContent = "00:00:00";
+    //   document.body.style.backgroundColor = "antiquewhite";
+    //   playaudio();
+    //   return;
+    //   //残り10秒になったら1秒ごとに背景の色を切り替える
+    // } else if (mm === 0 && ss < 10 && ss % 2 === 0) {
+    //   document.body.style.background = "orange";
+    // } else if (mm === 0 && ss < 10 && ss % 2 === 1) {
+    //   document.body.style.background = "yellow";
+    // }
 
     //経過時間を計算する
     targetSec--;
     mm = Math.floor(targetSec / 60);
     ss = targetSec - mm * 60;
   }, 1000);
-}
+};
 
 function stopTimer() {
-  window.clearInterval(timer);
-  //   timer = null;
-  timer = undefined;
+  hasStoppedOnce = true;
+  console.log("??", intervalId);
+  window.clearInterval(intervalId);
+  //   intervalId = null;
+  intervalId = undefined;
 }
 
 //setIntervalID, タイマーとメッセージを初期化
 function clearTimer() {
-  window.clearInterval(timer);
-  //   timer = null;
-  timer = undefined;
-  document.getElementById("result")!.textContent = "00:00:00";
+  window.clearInterval(intervalId);
+  //   intervalId = null;
+  intervalId = undefined;
+  document.getElementById("result")!.textContent = "00:00";
   document.body.querySelector("input")!.value = "";
   document.getElementById("message")!.textContent = " ";
   document.body.style.backgroundColor = "antiquewhite";
@@ -115,7 +109,7 @@ function message(breakTime: number) {
   mm = mm < 10 ? "0" + mm : mm;
 
   let message = document.getElementById("message");
-  message!.textContent = `休憩時間は ${hh}:${mm} までです`;
+  message!.textContent = `Break time is until ${hh}:${mm}`;
 }
 
 //全角から半角に変換
@@ -135,6 +129,16 @@ function stopaudio() {
   const player = <HTMLVideoElement>document.getElementById("audio")!;
   player.pause();
 }
+
+const startButton = document.getElementById("startButton");
+startButton!.addEventListener("click", startTimer);
+
+const stopButton = document.getElementById("stopButton");
+stopButton!.addEventListener("click", stopTimer);
+
+const clearButton = document.getElementById("clearButton");
+clearButton!.addEventListener("click", clearTimer);
+
 
 /*
 参考

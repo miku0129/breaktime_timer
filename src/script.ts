@@ -1,33 +1,40 @@
 "use strict";
 
-let hasStoppedOnce = false;
 let ss: number | string = 0;
 let mm: number | string = 0;
-let targetSec: number = 0;
-let intervalId: number | undefined;
+let targetSec = 0;
+let intervalId = 0;
+let hasStoppedOnce = false;
 let result;
+
+const initTimer = (): void => {
+  //タイマー開始直後は入力値から値を取得する。入力時は半角に変換する
+  mm = document.body.querySelector("input")!.value;
+  mm = hankaku(mm);
+  mm = typeof mm === "string" ? parseInt(mm) : mm;
+
+  //未入力、ゼロよりも小さな値にはメッセージを返す
+  if (!mm) {
+    console.log("set minutes");
+    document.getElementById("message")!.textContent = "Incorrect input";
+    return;
+  } else if (typeof mm === "number" && mm < 0) {
+    console.log("should be a positive number");
+    document.getElementById("message")!.textContent =
+      "Please enter a number greater than zero";
+    return;
+  }
+  document.getElementById("message")!.textContent = "";
+  targetSec = mm * 60;
+  ss = 0;
+};
 
 const startTimer = (): void => {
   if (!hasStoppedOnce) {
-    //タイマー開始直後は入力値から値を取得する。入力時は半角に変換する
-    mm = document.body.querySelector("input")!.value;
-    mm = hankaku(mm);
-    mm = typeof mm === "string" ? parseInt(mm) : mm;
-
-    //未入力、ゼロよりも小さな値にはメッセージを返す
-    if (!mm) {
-      console.log("set minutes");
-      document.getElementById("message")!.textContent = "Incorrect input";
-      return;
-    } else if (typeof mm === "number" && mm < 0) {
-      console.log("should be a positive number");
-      document.getElementById("message")!.textContent =
-        "Please enter a number greater than zero";
-      return;
-    }
-
-    targetSec = mm * 60;
-    ss = 0;
+    initTimer();
+  }
+  if (targetSec === 0) {
+    return;
   }
 
   // typeof mm === "string" ? message(parseInt(mm)) : mm;
@@ -69,26 +76,24 @@ const startTimer = (): void => {
   }, 1000);
 };
 
-function stopTimer() {
+const stopTimer = (): void => {
   hasStoppedOnce = true;
-  console.log("??", intervalId);
-  window.clearInterval(intervalId);
-  //   intervalId = null;
-  intervalId = undefined;
-}
+  window.clearInterval(intervalId!);
+  intervalId = 0;
+};
 
-//setIntervalID, タイマーとメッセージを初期化
-function clearTimer() {
-  window.clearInterval(intervalId);
-  //   intervalId = null;
-  intervalId = undefined;
+//初期化
+const clearTimer = (): void => {
+  window.clearInterval(intervalId!);
+  intervalId = 0;
+  hasStoppedOnce = false;
+  targetSec = 0;
   document.getElementById("result")!.textContent = "00:00";
   document.body.querySelector("input")!.value = "";
   document.getElementById("message")!.textContent = " ";
   document.body.style.backgroundColor = "antiquewhite";
-
   stopaudio();
-}
+};
 
 function message(breakTime: number) {
   let now = new Date();
@@ -138,7 +143,6 @@ stopButton!.addEventListener("click", stopTimer);
 
 const clearButton = document.getElementById("clearButton");
 clearButton!.addEventListener("click", clearTimer);
-
 
 /*
 参考

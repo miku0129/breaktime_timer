@@ -7,10 +7,17 @@ let intervalId = 0;
 let hasStoppedOnce = false;
 let result;
 
+//全角から半角に変換
+const convertHankaku = (str: string): string => {
+  return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (s) {
+    return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
+  });
+};
+
 const initTimer = (): void => {
   //タイマー開始直後は入力値から値を取得する。入力時は半角に変換する
   mm = document.body.querySelector("input")!.value;
-  mm = hankaku(mm);
+  mm = convertHankaku(mm);
   mm = typeof mm === "string" ? parseInt(mm) : mm;
 
   //未入力、ゼロよりも小さな値にはメッセージを返す
@@ -37,7 +44,7 @@ const startTimer = (): void => {
     return;
   }
 
-  // typeof mm === "string" ? message(parseInt(mm)) : mm;
+  typeof mm === "number" ? message(mm) : console.log(typeof mm);
 
   intervalId = window.setInterval(() => {
     if (intervalId !== null && targetSec > 0) {
@@ -55,19 +62,19 @@ const startTimer = (): void => {
     mm = typeof mm === "string" ? parseInt(mm) : mm;
 
     // //分と秒がゼロになったら終了させ、効果音を鳴らす
-    // if (mm === 0 && ss === 0) {
-    //   console.log("fin");
-    //   stopTimer();
-    //   document.getElementById("result")!.textContent = "00:00:00";
-    //   document.body.style.backgroundColor = "antiquewhite";
-    //   playaudio();
-    //   return;
-    //   //残り10秒になったら1秒ごとに背景の色を切り替える
-    // } else if (mm === 0 && ss < 10 && ss % 2 === 0) {
-    //   document.body.style.background = "orange";
-    // } else if (mm === 0 && ss < 10 && ss % 2 === 1) {
-    //   document.body.style.background = "yellow";
-    // }
+    if (mm === 0 && ss === 0) {
+      console.log("fin");
+      clearTimer();
+      document.getElementById("result")!.textContent = "00:00";
+      document.body.style.backgroundColor = "palegoldenrod";
+      playaudio();
+      return;
+      //残り10秒になったら1秒ごとに背景の色を切り替える
+    } else if (mm === 0 && ss < 10 && ss % 2 === 0) {
+      document.body.style.background = "lightsalmon";
+    } else if (mm === 0 && ss < 10 && ss % 2 === 1) {
+      document.body.style.background = "yellowgreen";
+    }
 
     //経過時間を計算する
     targetSec--;
@@ -91,7 +98,7 @@ const clearTimer = (): void => {
   document.getElementById("result")!.textContent = "00:00";
   document.body.querySelector("input")!.value = "";
   document.getElementById("message")!.textContent = " ";
-  document.body.style.backgroundColor = "antiquewhite";
+  document.body.style.backgroundColor = "palegoldenrod";
   stopaudio();
 };
 
@@ -115,13 +122,6 @@ function message(breakTime: number) {
 
   let message = document.getElementById("message");
   message!.textContent = `Break time is until ${hh}:${mm}`;
-}
-
-//全角から半角に変換
-function hankaku(str: string) {
-  return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (s) {
-    return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
-  });
 }
 
 //音楽を鳴らす
@@ -154,10 +154,6 @@ https://www.yoheim.net/blog.php?q=20191101
 タイマー終了時に音を鳴らす <audio>タグの使い方
 https://novicengineering.com/javascript_timer_4/
 
-Googleドライブ内の音声ファイルをaudioタグで再生する
-※実際にはファイルIDの後に拡張子は不要だった
-https://www.pre-practice.net/2019/03/googleaudio.html
-
-Googleドライブ上のファイルに直接アクセスする
-https://qiita.com/rot-z/items/299ac40361690c51ce1d
+音源
+https://developers.google.com/assistant/tools/sound-library/alarms
 */

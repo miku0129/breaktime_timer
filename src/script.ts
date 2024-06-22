@@ -1,15 +1,23 @@
 "use strict";
 
-const incorrectInput = "Entrée incorrecte";
-const shouldBePositiveNum = "Veuillez entrer un nombre supérieur à zéro";
-const tellEndOfBreaktime = "L'heure de la pause est jusqu'à";
-
+const incorrectInputMsg = "Entrée incorrecte";
+const shouldBePositiveNumMsg = "Veuillez entrer un nombre supérieur à zéro";
+const tellEndOfBreaktimeMsg = "La pause est jusqu'à";
+const startBtnMsg = "Démarrer";
+const restartBtnMsg = "Relancer";
+const initialClockPanel = "00:00"
 let ss: number | string = 0;
 let mm: number | string = 0;
 let targetSec = 0;
 let intervalId = 0;
 let hasStoppedOnce = false;
-let result;
+let clockPanel;
+
+document.getElementById("title")!.textContent = "Minuterie de pause☕";
+document.getElementById("startBtn")!.textContent = startBtnMsg;
+document.getElementById("stopBtn")!.textContent = "Metter en pause";
+document.getElementById("clearBtn")!.textContent = "Supprimer";
+document.getElementById("clock-panel")!.textContent = initialClockPanel;
 
 //全角から半角に変換
 const convertHankaku = (str: string): string => {
@@ -19,7 +27,6 @@ const convertHankaku = (str: string): string => {
 };
 
 const initTimer = (): void => {
-  const title = document.getElementById("title")
   //タイマー開始直後は入力値から値を取得する。入力時は半角に変換する
   mm = document.body.querySelector("input")!.value;
   mm = convertHankaku(mm);
@@ -27,10 +34,10 @@ const initTimer = (): void => {
 
   //未入力、ゼロよりも小さな値にはメッセージを返す
   if (!mm) {
-    document.getElementById("message")!.textContent = incorrectInput;
+    document.getElementById("message")!.textContent = incorrectInputMsg;
     return;
   } else if (typeof mm === "number" && mm < 0) {
-    document.getElementById("message")!.textContent = shouldBePositiveNum;
+    document.getElementById("message")!.textContent = shouldBePositiveNumMsg;
     return;
   }
   document.getElementById("message")!.textContent = "";
@@ -41,12 +48,14 @@ const initTimer = (): void => {
 const startTimer = (): void => {
   if (!hasStoppedOnce) {
     initTimer();
+  } else {
+    document.getElementById("startBtn")!.textContent = startBtnMsg;
   }
   if (targetSec === 0) {
     return;
   }
 
-  typeof mm === "number" ? message(mm) : console.log(typeof mm);
+  typeof mm === "number" ? message(mm) : mm;
 
   intervalId = window.setInterval(() => {
     if (intervalId !== null && targetSec > 0) {
@@ -55,8 +64,8 @@ const startTimer = (): void => {
       ss = ss < 10 && ss >= 0 ? "0" + ss : ss;
       mm = mm < 10 && mm >= 0 ? "0" + mm : mm;
     }
-    result = document.getElementById("result");
-    result!.textContent = `${mm}:${ss}`;
+    clockPanel = document.getElementById("clock-panel");
+    clockPanel!.textContent = `${mm}:${ss}`;
 
     ss = typeof ss === "string" ? parseInt(ss) : ss;
     mm = typeof mm === "string" ? parseInt(mm) : mm;
@@ -64,8 +73,8 @@ const startTimer = (): void => {
     // //分と秒がゼロになったら終了させ、効果音を鳴らす
     if (mm === 0 && ss === 0) {
       clearTimer();
-      document.getElementById("result")!.textContent = "00:00";
-      document.body.style.backgroundColor = "palegoldenrod";
+      document.getElementById("clock-panel")!.textContent = initialClockPanel;
+      document.body.style.backgroundColor = "antiquewhite";
       playaudio();
       return;
       //残り10秒になったら1秒ごとに背景の色を切り替える
@@ -86,6 +95,7 @@ const stopTimer = (): void => {
   hasStoppedOnce = true;
   window.clearInterval(intervalId!);
   intervalId = 0;
+  document.getElementById("startBtn")!.textContent = restartBtnMsg;
 };
 
 //初期化
@@ -94,10 +104,11 @@ const clearTimer = (): void => {
   intervalId = 0;
   hasStoppedOnce = false;
   targetSec = 0;
-  document.getElementById("result")!.textContent = "00:00";
+  document.getElementById("clock-panel")!.textContent = initialClockPanel;
   document.body.querySelector("input")!.value = "";
   document.getElementById("message")!.textContent = " ";
-  document.body.style.backgroundColor = "palegoldenrod";
+  document.getElementById("startBtn")!.textContent = startBtnMsg;
+  document.body.style.backgroundColor = "antiquewhite";
   stopaudio();
 };
 
@@ -120,7 +131,7 @@ function message(breakTime: number) {
   mm = mm < 10 ? "0" + mm : mm;
 
   let message = document.getElementById("message");
-  message!.textContent = `${tellEndOfBreaktime} ${hh}:${mm}`;
+  message!.textContent = `${tellEndOfBreaktimeMsg} ${hh}:${mm}`;
 }
 
 //音楽を鳴らす
@@ -134,13 +145,11 @@ function stopaudio() {
   player.pause();
 }
 
-const startButton = document.getElementById("startButton");
+const startButton = document.getElementById("startBtn");
 startButton!.addEventListener("click", startTimer);
-
-const stopButton = document.getElementById("stopButton");
+const stopButton = document.getElementById("stopBtn");
 stopButton!.addEventListener("click", stopTimer);
-
-const clearButton = document.getElementById("clearButton");
+const clearButton = document.getElementById("clearBtn");
 clearButton!.addEventListener("click", clearTimer);
 
 /*

@@ -13,25 +13,28 @@
   <body>
     <h1 id="title"></h1>
     <hr />
-    <label for="name1">Durée(min)</label>
-    <input type="text" id="name1" name="breakTime" size="10" placeholder="0" />
+    <label for="input-duration">Durée(min)</label>
+    <input
+      type="text"
+      id="input-duration"
+      name="input-duration"
+      size="10"
+      placeholder="0"
+    />
     <br />
-    <button id="startButton" onclick="startTimer">start</button>
-    <button id="stopButton" onclick="stopTimer">stop</button>
-    <button id="clearButton" onclick="clearTimer">clear</button>
+    <button id="startBtn" onclick="startTimer"></button>
+    <button id="stopBtn" onclick="stopTimer"></button>
+    <button id="clearBtn" onclick="clearTimer"></button>
     <div class="show">
-      <p id="result">00:00</p>
+      <p id="clock-panel"></p>
       <p id="message"></p>
     </div>
-    <!-- <audio src="https://drive.google.com/uc?id=1v-OLByXZ1W9IWfZVimKztd9NovpFclp4" preload="auto" loop id="audio">Your browser does not support the -->
     <audio
       src="https://actions.google.com/sounds/v1/alarms/medium_bell_ringing_near.ogg"
       preload="auto"
       id="audio"
     >
-      Your browser does not support the
-
-      <code>audio</code> element.
+      Your browser does not support the <code>audio</code> element.
     </audio>
     <script type="text/javascript" src="dist/script.js"></script>
   </body>

@@ -1,4 +1,5 @@
 "use strict";
+import { convertHankaku } from "utils";
 
 let ss: number | string = 0;
 let mm: number | string = 0;
@@ -7,12 +8,12 @@ let intervalId = 0;
 let hasStoppedOnce = false;
 let result;
 
-//全角から半角に変換
-const convertHankaku = (str: string): string => {
-  return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (s) {
-    return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
-  });
-};
+// //全角から半角に変換
+// const convertHankaku = (str: string): string => {
+//   return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (s) {
+//     return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
+//   });
+// };
 
 const initTimer = (): void => {
   //タイマー開始直後は入力値から値を取得する。入力時は半角に変換する

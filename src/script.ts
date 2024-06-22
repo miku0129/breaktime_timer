@@ -1,5 +1,8 @@
 "use strict";
-import { convertHankaku } from "utils";
+
+const incorrectInput = "Entrée incorrecte";
+const shouldBePositiveNum = "Veuillez entrer un nombre supérieur à zéro";
+const tellEndOfBreaktime = "L'heure de la pause est jusqu'à";
 
 let ss: number | string = 0;
 let mm: number | string = 0;
@@ -8,14 +11,15 @@ let intervalId = 0;
 let hasStoppedOnce = false;
 let result;
 
-// //全角から半角に変換
-// const convertHankaku = (str: string): string => {
-//   return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (s) {
-//     return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
-//   });
-// };
+//全角から半角に変換
+const convertHankaku = (str: string): string => {
+  return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (s) {
+    return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
+  });
+};
 
 const initTimer = (): void => {
+  const title = document.getElementById("title")
   //タイマー開始直後は入力値から値を取得する。入力時は半角に変換する
   mm = document.body.querySelector("input")!.value;
   mm = convertHankaku(mm);
@@ -23,13 +27,10 @@ const initTimer = (): void => {
 
   //未入力、ゼロよりも小さな値にはメッセージを返す
   if (!mm) {
-    console.log("set minutes");
-    document.getElementById("message")!.textContent = "Incorrect input";
+    document.getElementById("message")!.textContent = incorrectInput;
     return;
   } else if (typeof mm === "number" && mm < 0) {
-    console.log("should be a positive number");
-    document.getElementById("message")!.textContent =
-      "Please enter a number greater than zero";
+    document.getElementById("message")!.textContent = shouldBePositiveNum;
     return;
   }
   document.getElementById("message")!.textContent = "";
@@ -49,8 +50,6 @@ const startTimer = (): void => {
 
   intervalId = window.setInterval(() => {
     if (intervalId !== null && targetSec > 0) {
-      console.log("timer", mm, ":", ss);
-
       ss = typeof ss === "string" ? parseInt(ss) : ss;
       mm = typeof mm === "string" ? parseInt(mm) : mm;
       ss = ss < 10 && ss >= 0 ? "0" + ss : ss;
@@ -64,7 +63,6 @@ const startTimer = (): void => {
 
     // //分と秒がゼロになったら終了させ、効果音を鳴らす
     if (mm === 0 && ss === 0) {
-      console.log("fin");
       clearTimer();
       document.getElementById("result")!.textContent = "00:00";
       document.body.style.backgroundColor = "palegoldenrod";
@@ -122,7 +120,7 @@ function message(breakTime: number) {
   mm = mm < 10 ? "0" + mm : mm;
 
   let message = document.getElementById("message");
-  message!.textContent = `Break time is until ${hh}:${mm}`;
+  message!.textContent = `${tellEndOfBreaktime} ${hh}:${mm}`;
 }
 
 //音楽を鳴らす

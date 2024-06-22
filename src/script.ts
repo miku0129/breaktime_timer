@@ -71,9 +71,9 @@ const startTimer = (): void => {
       return;
       //残り10秒になったら1秒ごとに背景の色を切り替える
     } else if (mm === 0 && ss < 10 && ss % 2 === 0) {
-      document.body.style.background = "lightsalmon";
+      document.body.style.background = "gold";
     } else if (mm === 0 && ss < 10 && ss % 2 === 1) {
-      document.body.style.background = "yellowgreen";
+      document.body.style.background = "greenyellow";
     }
 
     //経過時間を計算する

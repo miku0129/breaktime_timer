@@ -2,7 +2,6 @@ import path from "path";
 import { Configuration } from "webpack";
 import "webpack-dev-server";
 
-const CleanPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const config: Configuration = {
@@ -27,6 +26,7 @@ const config: Configuration = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
+    clean: true, //出力ファルダ内のファイルを全て削除してから、出力する
   },
   devServer: {
     static: path.join(__dirname, "dist"),
@@ -34,7 +34,7 @@ const config: Configuration = {
     port: 4000,
   },
   plugins: [
-    new CleanPlugin.CleanWebpackPlugin(),
+    // new CleanPlugin.CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       // injects bundle.js to our new index.html
       inject: true,

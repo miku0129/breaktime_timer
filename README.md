@@ -1,6 +1,6 @@
 ## Minuterie 
 
-Effective time management is crucial for all businesses.. ⏰
+Effective time management is crucial for all businesses.⏰
 
 I've created an application called <strong>Minuterie</strong> to improve operations.<br> 
 

@@ -14,3 +14,6 @@ Now you won't make mistakes anymore!
 
 ## Try this app
 https://minuterie.msano.ovh/
+
+I dedicate this app to our UFCV tutors, Tetiana and Peggy.
+With gratitude for teaching me the joy of learning French.

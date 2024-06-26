@@ -2,7 +2,7 @@
 
 const incorrectInputMsg = "Entrée incorrecte";
 const shouldBePositiveNumMsg = "Veuillez entrer un nombre supérieur à zéro";
-const tellEndOfBreaktimeMsg = "La pause est jusqu'à";
+const tellEndOfBreaktimeMsg = "Jusqu'à";
 const startBtnMsg = "Démarrer";
 const restartBtnMsg = "Relancer";
 const initialClockPanel = "00:00"
@@ -13,7 +13,7 @@ let intervalId = 0;
 let hasStoppedOnce = false;
 let clockPanel;
 
-document.getElementById("title")!.textContent = "Minuterie de pause☕";
+document.getElementById("title")!.textContent = "Minuterie⏰";
 document.getElementById("startBtn")!.textContent = startBtnMsg;
 document.getElementById("stopBtn")!.textContent = "Metter en pause";
 document.getElementById("clearBtn")!.textContent = "Supprimer";

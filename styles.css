@@ -1,21 +1,23 @@
 body {
   background-color: antiquewhite;
 }
-
 #title {
   color: burlywood;
 }
-
+.input-block {
+  margin: 20px 20px 20px 20px;
+}
+.btn-block{
+  margin: 20px 20px 20px 20px;
+}
 .show {
   text-align: center;
 }
-
 .show #clock-panel {
   margin-top: 50px;
   font-size: 100px;
   margin-bottom: 5px;
 }
-
 .show #message {
   font-size: 50px;
   margin-top: 10px;

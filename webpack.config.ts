@@ -3,6 +3,8 @@ import { Configuration } from "webpack";
 import "webpack-dev-server";
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+//現在の構成ではcssをモジュールとしてバンドルできないので、htmlファイルに直接記載した。
+//開発にはcssファイルの方が都合がいいので、tsc --watchを使う。
 
 const config: Configuration = {
   entry: "./src/index.ts",
@@ -34,7 +36,6 @@ const config: Configuration = {
     port: 4000,
   },
   plugins: [
-    // new CleanPlugin.CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       // injects bundle.js to our new index.html
       inject: true,

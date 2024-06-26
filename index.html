@@ -7,24 +7,54 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <meta name="theme-color" content="#000000" />
-    <title>Minuterie de pause</title>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <title>Minuterie</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        background-color: antiquewhite;
+      }
+      #title {
+        color: burlywood;
+      }
+      .input-block {
+        margin: 20px 20px 20px 20px;
+      }
+      .btn-block {
+        margin: 20px 20px 20px 20px;
+      }
+      .show {
+        text-align: center;
+      }
+      .show #clock-panel {
+        margin-top: 50px;
+        font-size: 100px;
+        margin-bottom: 5px;
+      }
+      .show #message {
+        font-size: 50px;
+        margin-top: 10px;
+        color: gray;
+      }
+    </style>
   </head>
   <body>
     <h1 id="title"></h1>
     <hr />
-    <label for="input-duration">Durée(min)</label>
-    <input
-      type="text"
-      id="input-duration"
-      name="input-duration"
-      size="10"
-      placeholder="0"
-    />
-    <br />
-    <button id="startBtn"></button>
-    <button id="stopBtn"></button>
-    <button id="clearBtn"></button>
+    <div class="input-block">
+      <label for="input-duration">Durée(min)</label>
+      <input
+        type="text"
+        id="input-duration"
+        name="input-duration"
+        size="10"
+        placeholder="0"
+      />
+    </div>
+    <div class="btn-block">
+      <button id="startBtn"></button>
+      <button id="stopBtn"></button>
+      <button id="clearBtn"></button>
+    </div>
     <div class="show">
       <p id="clock-panel"></p>
       <p id="message"></p>

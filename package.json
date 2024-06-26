@@ -1,7 +1,8 @@
 {
   "scripts": {
     "start": "webpack-dev-server --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "start-tsc": "tsc --watch"
   },
   "dependencies": {
     "typescript": "^5.5.2"

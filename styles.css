@@ -23,3 +23,8 @@ body {
   margin-top: 10px;
   color: gray;
 }
+
+@media screen and (min-width: 800px) {
+  .show #clock-panel {
+    font-size: 180px;
+  }}

@@ -1,32 +1,16 @@
-## Break Time Timer 
+## Minuterie 
 
-As an programming instructor, a skill of time management is critial. ⏰
+Effective time management is crucial for all businesses.. ⏰
 
-I have created an application to improve business operations.<br> 
-It's called Break Time Timer!<br>
+I've created an application called <strong>Minuterie</strong> to improve operations.<br> 
 
-I'm not good at calculating time,<br> 
-so I always have to pause for a while before telling the break time.<br> 
-With this application, what I need to do is<br>
-just inputting the break time (minutes) <br>
-then it calculated and displayed on its own. So that everyone can take a break promptly.
-
+With this app, all you need to do is enter the desired time (in minutes),
+and it calculates and displays the information automatically.<br>
+It's that easy!<br>
 Now you won't make mistakes anymore! 
 
-プログラミングの講師として、タイムマネジメントのスキルは重要です。⏰
-
-業務改善のためのアプリケーションを作りました。その名も「Break Time Timer」!
-
-私は時間の計算が苦手なので、休憩時間を伝えるのがいつも一苦労です。<br>
-このアプリケーションは、休憩時間（分）を入力するだけで、勝手に計算して表示してくれます。<br>
-そうすれば、誰もが速やかに休憩を取ることができます。
-
-これでもう間違えなくなりますね! 
-
 ## Demo
+![break_time_timer_demo](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3A0NDBjc2RuejJwdXM2NWlxZXg5ZW0wY2oyamt6czhzZHk3NHJ1MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gVXAFDD1L0bdnGYOFo/giphy.gif)
 
-![break_time_timer_demo](https://user-images.githubusercontent.com/58237700/173501849-b9202741-b032-4b65-bc29-99798589adb8.gif)
-
-## You can get the app here 
-
-https://codepen.io/mikuSan/full/LYQBmvB
+## Try this app
+https://minuterie.msano.ovh/

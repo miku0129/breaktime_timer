@@ -1,37 +1,74 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head >
+  <head>
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <meta name="theme-color" content="#000000" />
-    <title>Break Time Timer</title>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <title>Minuterie</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+body {
+  background-color: antiquewhite;
+}
+#title {
+  color: burlywood;
+}
+.input-block {
+  margin: 20px 20px 20px 20px;
+}
+.btn-block{
+  margin: 20px 20px 20px 20px;
+}
+.show {
+  text-align: center;
+}
+.show #clock-panel {
+  margin-top: 50px;
+  font-size: 100px;
+  margin-bottom: 5px;
+}
+.show #message {
+  font-size: 50px;
+  margin-top: 10px;
+  color: gray;
+}
+@media screen and (min-width: 800px) {
+  .show #clock-panel {
+    font-size: 180px;
+  }}    </style>
   </head>
   <body>
-    <h1 id="title">Break Time Timer☕🐦</h1>
+    <h1 id="title"></h1>
     <hr />
-    <label for="name1">Break time</label>
-    <input id="name1"
-      type="text"
-      id="breakTime"
-      name="breakTime"
-      size="10"
-      placeholder="0"
-    />
-    <br>
-    <button id="startButton" onclick="startTimer">start</button>
-    <button id="stopButton" onclick="stopTimer">stop</button>
-    <button id="clearButton" onclick="clearTimer">clear</button>
+    <div class="input-block">
+      <label for="input-duration">Durée(min)</label>
+      <input
+        type="text"
+        id="input-duration"
+        name="input-duration"
+        size="10"
+        placeholder="0"
+      />
+    </div>
+    <div class="btn-block">
+      <button id="startBtn"></button>
+      <button id="stopBtn"></button>
+      <button id="clearBtn"></button>
+    </div>
     <div class="show">
-      <p id="result">00:00:00</p>
+      <p id="clock-panel"></p>
       <p id="message"></p>
     </div>
-      <audio src="https://drive.google.com/uc?id=1v-OLByXZ1W9IWfZVimKztd9NovpFclp4" preload="auto" loop id="audio">Your browser does not support the
-        <code>audio</code> element.
-        </audio>
-    <script type="text/javascript" src="script.js"></script>
+    <audio
+      src="https://actions.google.com/sounds/v1/alarms/medium_bell_ringing_near.ogg"
+      preload="auto"
+      id="audio"
+    >
+      Your browser does not support the <code>audio</code> element.
+    </audio>
+    <script type="text/javascript" src="dist/bundle.js"></script>
   </body>
 </html>

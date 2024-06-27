@@ -1,6 +1,6 @@
 ## Minuterie 
 
-Effective time management is crucial for all businesses.. ⏰
+Effective time management is crucial for all businesses.⏰
 
 I've created an application called <strong>Minuterie</strong> to improve operations.<br> 
 
@@ -14,3 +14,6 @@ Now you won't make mistakes anymore!
 
 ## Try this app
 https://minuterie.msano.ovh/
+
+<i>I dedicate this app to our UFCV tutors, Tetiana and Peggy.
+With gratitude for teaching me the joy of learning French.</i>
